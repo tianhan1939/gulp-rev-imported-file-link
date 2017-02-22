@@ -1,0 +1,24 @@
+{
+  "name": "gulp-rev-imported-file-link",
+  "version": "1.0.0",
+  "description": "Revision file link which imported by a Html,CSS or JS file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tianhan1939/gulp-rev-imported-file-link.git"
+  },
+  "keywords": [
+    "gulpplugin",
+    "revision",
+    "file-tag"
+  ],
+  "author": "yuanshou <yuanshou.ly@alibaba-inc.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tianhan1939/gulp-rev-imported-file-link/issues"
+  },
+  "homepage": "https://github.com/tianhan1939/gulp-rev-imported-file-link#readme"
+}
