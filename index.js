@@ -1,3 +1,4 @@
+let path = require('path');
 let util = require('gulp-util');
 let Promise = require('promise');
 let through = require('through2');
@@ -34,6 +35,7 @@ RevImportedFileLink.prototype.revise = function () {
     let self = this;
     return through.obj(function (file, enc, cb) {
         let that = this;
+        let base = file.base;
         if (file.isStream()) {
             throw new PluginError(PLUGIN_NAME, 'Streams are not supported!');
         }
@@ -59,7 +61,7 @@ RevImportedFileLink.prototype.revise = function () {
                         }
 
                         // 对找到的link进行处理
-                        self.processLinks(self.links).then(function () {
+                        self.processLinks(self.links, base).then(function () {
                             // 替换原有link
                             fileString = self.linkMap.reduce(function (str, link) {
                                 return str.replace(link.old, link.new);
@@ -71,7 +73,7 @@ RevImportedFileLink.prototype.revise = function () {
                             // 返回
                             that.push(file);
                             cb();
-                        }, function (errData) {
+                        }, function () {
                             throw new PluginError(PLUGIN_NAME, 'Process Error')
                         })
                     } else {
@@ -91,7 +93,7 @@ RevImportedFileLink.prototype.getHash = function (src, len, method) {
     return crypto.createHash(method || 'md5').update(src).digest('hex').slice(0, len);
 };
 
-RevImportedFileLink.prototype.processLinks = function (links) {
+RevImportedFileLink.prototype.processLinks = function (links, base) {
     let urlReg = new RegExp(this.urlReg);
     let self = this;
 
@@ -125,7 +127,8 @@ RevImportedFileLink.prototype.processLinks = function (links) {
                 // 否则尝试读本地文件
             } else {
                 let qs = QS.parse(url.query);
-                File.read(pathname).then(function (file) {
+                console.log(base, path.resolve(base, pathname));
+                File.read(path.resolve(base, pathname)).then(function (file) {
                     qs.v = self.getHash(file.contents, 8);
                     resolve(resolve({
                         link,

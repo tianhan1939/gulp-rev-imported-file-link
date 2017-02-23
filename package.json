@@ -1,6 +1,6 @@
 {
   "name": "gulp-rev-imported-file-link",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Revision file link which imported by a Html,CSS or JS file",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "revision",
     "file-tag"
   ],
-  "author": "yuanshou <yuanshou.ly@alibaba-inc.com>",
+  "author": "tianhan1939",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tianhan1939/gulp-rev-imported-file-link/issues"
@@ -32,6 +32,7 @@
     "jsdom": "^9.11.0",
     "modify-filename": "^1.1.0",
     "moment": "^2.17.1",
+    "path": "^0.12.7",
     "promise": "^7.1.1",
     "querystring": "^0.2.0",
     "request": "^2.79.0",

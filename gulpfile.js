@@ -5,7 +5,7 @@ var uglify = require('gulp-uglify');
 var Revision = require('./index');
 
 gulp.task('test', ['clean'], function () {
-    return gulp.src('index.html')
+    return gulp.src('src/index.html')
         .pipe(Revision.revise())
         .pipe(rename('test.html'))
         .pipe(gulp.dest('build'));
