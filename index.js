@@ -52,12 +52,16 @@ RevImportedFileLink.prototype.revise = function () {
                         // 查找script标签中的src参数
                         let scriptTags = window.document.getElementsByTagName('script');
                         for (let i = 0; i < scriptTags.length; i++) {
-                            self.links.push(scriptTags[i].src);
+                            if (scriptTags[i].src) {
+                                self.links.push(scriptTags[i].src);
+                            }
                         }
                         // 查找link标签中的href参数
                         let linkTags = window.document.getElementsByTagName('link');
                         for (let j = 0; j < linkTags.length; j++) {
-                            self.links.push(linkTags[j].href);
+                            if (linkTags[j].href) {
+                                self.links.push(linkTags[j].href);
+                            }
                         }
 
                         // 对找到的link进行处理
@@ -105,6 +109,7 @@ RevImportedFileLink.prototype.processLinks = function (links, base) {
             let qs = QS.parse(url.query);
 
             // 如果link是url则使用jsdom读文件
+            console.log(link)
             if (urlReg.test(link)) {
                 // 如果需要改变url中的版本
                 if (self.options.isUrlVersion) {
@@ -127,13 +132,12 @@ RevImportedFileLink.prototype.processLinks = function (links, base) {
                 // 否则尝试读本地文件
             } else {
                 let qs = QS.parse(url.query);
-                console.log(base, path.resolve(base, pathname));
                 File.read(path.resolve(base, pathname)).then(function (file) {
                     qs.v = self.getHash(file.contents, 8);
-                    resolve(resolve({
+                    resolve({
                         link,
                         qs: QS.stringify(qs)
-                    }))
+                    });
                 });
             }
         });

@@ -1,6 +1,6 @@
 {
   "name": "gulp-rev-imported-file-link",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Revision file link which imported by a Html,CSS or JS file",
   "main": "index.js",
   "scripts": {
