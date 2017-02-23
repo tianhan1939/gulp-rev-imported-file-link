@@ -6,7 +6,7 @@ var Revision = require('./index');
 
 gulp.task('test', ['clean'], function () {
     return gulp.src('index.html')
-        .pipe(new Revision({}).revise())
+        .pipe(Revision.revise())
         .pipe(rename('test.html'))
         .pipe(gulp.dest('build'));
 });
